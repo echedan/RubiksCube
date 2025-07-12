@@ -12,7 +12,7 @@ Cube::Cube(vector<vector<vector<char>>> newFaces){
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
-    
+    // i do later
   }
 }
 
@@ -37,7 +37,17 @@ string Cube::getStateHash();
 // -------------------------------------------------------
 
 // The layer that you are looking at and the 2 layers behind it
-void Cube::layer_facing_you_R();
+void Cube::layer_facing_you_R(int current_face){
+  // Shift colors on the face
+  vector<vector<char>> temp = cubeFaces[current_face];
+  for(int i = 0; i < ROWS; i++){
+    for(int j = 0; j < COLS; j++){
+      cubeFaces[current_face][j][ROWS - 1 - i] = temp[i][j];
+    }
+  }
+  // Shift colors on the side
+  
+}
 void Cube::layer_facing_you_L();
 void Cube::middle_wide_layer_R();
 void Cube::middle_wide_layer_L();
