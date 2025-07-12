@@ -45,8 +45,12 @@ void Cube::layer_facing_you_R(int current_face){
       cubeFaces[current_face][j][ROWS - 1 - i] = temp[i][j];
     }
   }
+
   // Shift colors on the side
-  
+  int opposite = opposite_face(current_face);
+  for(int i = 0; i < NUM_FACES; i++){
+    if(i == opposite) continue;
+    //I THINK IM STUCK
 }
 void Cube::layer_facing_you_L();
 void Cube::middle_wide_layer_R();
@@ -69,3 +73,9 @@ void Cube::middle_vertical_U();
 void Cube::middle_vertical_D();
 void Cube::right_vertical_U();
 void Cube::right_vertical_D();
+
+// Helper function
+int opposite_face(int current_face){
+  if(current_face % 2) return (current_face + 1) % NUM_FACES; // odd
+  else return (current_face - 1) % NUM_FACES; // even
+}
