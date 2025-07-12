@@ -41,6 +41,7 @@ class Cube{
     static constexpr int ROWS = 3;
     static constexpr int COLS = 3;
     vector<vector<vector<char>>> cubeFaces = vector<vector<vector<char>>>(NUM_FACES, vector<vector<char>>(ROWS, vector<char>(COLS)));
+    int opposite_face(int current_face);
 };
 
 #endif
