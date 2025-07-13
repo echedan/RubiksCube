@@ -3,6 +3,15 @@
 
 class Cube{
   public:
+    enum Face {
+      FRONT = 0,
+      BACK = 1,
+      LEFT = 2,
+      RIGHT = 3,
+      TOP = 4,
+      BOTTOM = 5
+    };
+
     Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
     void applyMove(string move); // selects one of the moves below
     bool isSolved(); // checks if every side is one color
