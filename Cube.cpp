@@ -75,7 +75,7 @@ void Cube::right_vertical_U();
 void Cube::right_vertical_D();
 
 // Helper function
-int opposite_face(int current_face){
-  if(current_face % 2) return (current_face + 1) % NUM_FACES; // odd
-  else return (current_face - 1) % NUM_FACES; // even
+int opposite_face(int current_face) {
+    if (current_face % 2 == 0) return current_face + 1; // even
+    else return current_face - 1; // odd
 }
