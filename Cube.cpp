@@ -37,21 +37,23 @@ string Cube::getStateHash();
 // -------------------------------------------------------
 
 // The layer that you are looking at and the 2 layers behind it
-void Cube::layer_facing_you_R(int current_face){
+void Cube::layer_facing_you_R(){
   // Shift colors on the face
-  vector<vector<char>> temp = cubeFaces[current_face];
+  vector<vector<char>> tempFace = cubeFaces[FRONT];
   for(int i = 0; i < ROWS; i++){
     for(int j = 0; j < COLS; j++){
-      cubeFaces[current_face][j][ROWS - 1 - i] = temp[i][j];
+      cubeFaces[FRONT][j][ROWS - 1 - i] = tempFace[i][j];
     }
   }
-
   // Shift colors on the side
-  int opposite = opposite_face(current_face);
-  for(int i = 0; i < NUM_FACES; i++){
-    if(i == opposite) continue;
-    //I THINK IM STUCK
+  vector<char> temp(3);
+  for (int i = 0; i < COLS; i++) temp[i] = cubeFaces[TOP][2][i]; // Save bottom row of TOP face
+  for (int i = 0; i < ROWS; i++) cubeFaces[TOP][2][i] = cubeFaces[LEFT][ROWS - 1 - i][2]; // RIGHT column of LEFT → bottom row of TOP
+  for (int i = 0; i < COLS; i++) cubeFaces[LEFT][i][2] = cubeFaces[BOTTOM][0][COLS - 1 - i]; // Top row of BOTTOM → RIGHT column of LEFT
+  for (int i = 0; i < ROWS; i++) cubeFaces[BOTTOM][0][i] = cubeFaces[RIGHT][i][0]; // LEFT column of RIGHT → top row of BOTTOM
+  for (int i = 0; i < COLS; i++) cubeFaces[RIGHT][i][0] = temp[i]; // Saved bottom row of TOP → LEFT column of RIGHT
 }
+
 void Cube::layer_facing_you_L();
 void Cube::middle_wide_layer_R();
 void Cube::middle_wide_layer_L();
@@ -74,7 +76,7 @@ void Cube::middle_vertical_D();
 void Cube::right_vertical_U();
 void Cube::right_vertical_D();
 
-// Helper function
+// Helper function (maybe we dont need)
 int opposite_face(int current_face) {
     if (current_face % 2 == 0) return current_face + 1; // even
     else return current_face - 1; // odd
