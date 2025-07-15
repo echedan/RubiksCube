@@ -36,7 +36,9 @@ string Cube::getStateHash();
 // 18 possible moves. I tried to make the names make sense
 // -------------------------------------------------------
 
+//======================================================================================================================================
 // The layer that you are looking at and the 2 layers behind it
+//======================================================================================================================================
 
 void Cube::layer_facing_you_R(){
   // Shift colors on the face
@@ -71,6 +73,8 @@ void Cube::layer_facing_you_L(){
   for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][2] = temp[i]; // Saved bottom row of TOP -> right column of LEFT
 }
 
+// -------------------------------------------------------------------------------------------------------------------------------------
+
 void Cube::middle_wide_layer_R(){
   // Shift colors on the side
   vector<char> temp(3);
@@ -90,10 +94,45 @@ void Cube::middle_wide_layer_L(){
   for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][1] = temp[i]; // Saved middle row of TOP -> middle column of LEFT
 }
 
-void Cube::back_layer_R();
-void Cube::back_layer_L();
+// -------------------------------------------------------------------------------------------------------------------------------------
 
+void Cube::back_layer_R(){
+  // Shift colors on the face
+  vector<vector<char>> tempFace = cubeFaces[BACK];
+  for(int i = 0; i < ROWS; i++){
+    for(int j = 0; j < COLS; j++){
+      cubeFaces[BACK][j][2 - i] = tempFace[i][j];
+    }
+  }
+  // Shift colors on the side
+  vector<char> temp(3);
+  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][0][i]; // Save top row of TOP face
+  for (int i = 0; i < 3; i++) cubeFaces[TOP][0][i] = cubeFaces[RIGHT][i][2]; // right column of RIGHT -> top row of TOP
+  for (int i = 0; i < 3; i++) cubeFaces[RIGHT][i][2] = cubeFaces[BOTTOM][2][2 - i]; // bottom row of BOTTOM -> right column of RIGHT
+  for (int i = 0; i < 3; i++) cubeFaces[BOTTOM][2][i] = cubeFaces[LEFT][2 - i][0]; // left colomn of LEFT -> bottom row of BOTTOM
+  for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][0] = temp[i]; // Saved top row of TOP -> left column of LEFT
+}
+void Cube::back_layer_L(){
+  // Shift colors on the face
+  vector<vector<char>> tempFace = cubeFaces[FRONT];
+  for(int i = 0; i < ROWS; i++){
+    for(int j = 0; j < COLS; j++){
+      cubeFaces[BACK][2 - j][i] = tempFace[i][j];
+    }
+  }
+  // Shift colors on the side
+  vector<char> temp(3);
+  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][0][i]; // Save top row of TOP face
+  for (int i = 0; i < 3; i++) cubeFaces[TOP][0][i] = cubeFaces[LEFT][2 - i][0]; // left column of LEFT -> top row of TOP
+  for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][0] = cubeFaces[BOTTOM][2][2 - i]; // bottom row of BOTTOM -> left column of LEFT
+  for (int i = 0; i < 3; i++) cubeFaces[BOTTOM][2][i] = cubeFaces[RIGHT][i][2]; // right column of RIGHT -> bottom row of BOTTOM
+  for (int i = 0; i < 3; i++) cubeFaces[RIGHT][i][2] = temp[i]; // Saved top row of TOP -> right column of RIGHT
+}
+
+//======================================================================================================================================
 // Horizontal layers
+//======================================================================================================================================
+
 void Cube::top_horizontal_R();
 void Cube::top_horizontal_L();
 void Cube::middle_horizontal_R();
@@ -101,7 +140,10 @@ void Cube::middle_horizontal_L();
 void Cube::bottom_horizontal_R();
 void Cube::bottom_horizontal_L();
 
+//======================================================================================================================================
 // Vertical layers (they go up and down, not left and right)
+//======================================================================================================================================
+
 void Cube::left_vertical_U();
 void Cube::left_vertical_D();
 void Cube::middle_vertical_U();
