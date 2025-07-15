@@ -48,7 +48,7 @@ void Cube::layer_facing_you_R(){
       cubeFaces[FRONT][j][2 - i] = tempFace[i][j];
     }
   }
-  // Shift colors on the side
+  // Shift colors on the sides
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][2][i]; // Save bottom row of TOP face
   for (int i = 0; i < 3; i++) cubeFaces[TOP][2][i] = cubeFaces[LEFT][2 - i][2]; // right column of LEFT -> bottom row of TOP
@@ -64,7 +64,7 @@ void Cube::layer_facing_you_L(){
       cubeFaces[FRONT][2 - j][i] = tempFace[i][j];
     }
   }
-  // Shift colors on the side
+  // Shift colors on the sides
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][2][i]; // Save bottom row of TOP face
   for (int i = 0; i < 3; i++) cubeFaces[TOP][2][i] = cubeFaces[RIGHT][i][0]; // left column of RIGHT -> bottom row of TOP
@@ -85,7 +85,7 @@ void Cube::middle_wide_layer_R(){
   for (int i = 0; i < 3; i++) cubeFaces[RIGHT][i][1] = temp[i]; // Saved middle row of TOP -> middle column of RIGHT
 }
 void Cube::middle_wide_layer_L(){
-  // Shift colors on the side
+  // Shift colors on the sides
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][1][i]; // Save middle row of TOP face
   for (int i = 0; i < 3; i++) cubeFaces[TOP][1][i] = cubeFaces[RIGHT][i][1]; // middle column of RIGHT -> middle row of TOP
@@ -104,7 +104,7 @@ void Cube::back_layer_R(){
       cubeFaces[BACK][j][2 - i] = tempFace[i][j];
     }
   }
-  // Shift colors on the side
+  // Shift colors on the sides
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][0][i]; // Save top row of TOP face
   for (int i = 0; i < 3; i++) cubeFaces[TOP][0][i] = cubeFaces[RIGHT][i][2]; // right column of RIGHT -> top row of TOP
@@ -120,7 +120,7 @@ void Cube::back_layer_L(){
       cubeFaces[BACK][2 - j][i] = tempFace[i][j];
     }
   }
-  // Shift colors on the side
+  // Shift colors on the sides
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][0][i]; // Save top row of TOP face
   for (int i = 0; i < 3; i++) cubeFaces[TOP][0][i] = cubeFaces[LEFT][2 - i][0]; // left column of LEFT -> top row of TOP
@@ -133,8 +133,41 @@ void Cube::back_layer_L(){
 // Horizontal layers
 //======================================================================================================================================
 
-void Cube::top_horizontal_R();
-void Cube::top_horizontal_L();
+void Cube::top_horizontal_R(){
+  // Shift colors on the face
+  vector<vector<char>> tempFace = cubeFaces[TOP];
+  for(int i = 0; i < ROWS; i++){
+    for(int j = 0; j < COLS; j++){
+      cubeFaces[TOP][j][2 - i] = tempFace[i][j];
+    }
+  }
+  // Shift colors on the sides
+  vector<char> temp(3);
+  for(int i = 0; i < 3; i++) temp[i] = cubeFaces[BACK][0][i]; // Save top row of BACK
+  for(int i = 0; i < 3; i++) cubeFaces[BACK][0][i] = cubeFaces[LEFT][0][i]; // top row of LEFT -> top row of BACK
+  for(int i = 0; i < 3; i++) cubeFaces[LEFT][0][i] = cubeFaces[FRONT][0][i]; // top row of FRONT -> top row of LEFT
+  for(int i = 0; i < 3; i++) cubeFaces[FRONT][0][i] = cubeFaces[RIGHT][0][i]; // top row of RIGHT -> top row of FRONT
+  for(int i = 0; i < 3; i++) cubeFaces[RIGHT][0][i] = temp[i]; // Saved top row of BACK -> top row of RIGHT
+}
+void Cube::top_horizontal_L(){
+  // Shift colors on the face
+  vector<vector<char>> tempFace = cubeFaces[TOP];
+  for(int i = 0; i < ROWS; i++){
+    for(int j = 0; j < COLS; j++){
+      cubeFaces[TOP][2 - j][i] = tempFace[i][j];
+    }
+  }
+  // Shift colors on the sides
+  vector<char> temp(3);
+  for(int i = 0; i < 3; i++) temp[i] = cubeFaces[BACK][0][i]; // Save top row of BACK
+  for(int i = 0; i < 3; i++) cubeFaces[BACK][0][i] = cubeFaces[RIGHT][0][i]; // top row of RIGHT -> top row of BACK
+  for(int i = 0; i < 3; i++) cubeFaces[RIGHT][0][i] = cubeFaces[FRONT][0][i]; // top row of FRONT -> top row of RIGHT
+  for(int i = 0; i < 3; i++) cubeFaces[FRONT][0][i] = cubeFaces[LEFT][0][i]; // top row of LEFT -> top row of FRONT
+  for(int i = 0; i < 3; i++) cubeFaces[LEFT][0][i] = temp[i]; // Saved top row of BACK -> top row of LEFT
+}
+
+// -------------------------------------------------------------------------------------------------------------------------------------
+
 void Cube::middle_horizontal_R();
 void Cube::middle_horizontal_L();
 void Cube::bottom_horizontal_R();
