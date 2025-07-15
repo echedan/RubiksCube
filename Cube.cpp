@@ -70,7 +70,16 @@ void Cube::layer_facing_you_L(){
   for (int i = 0; i < 3; i++) cubeFaces[BOTTOM][0][i] = cubeFaces[LEFT][2 - i][2]; // right colomn of LEFT -> top row of BOTTOM
   for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][2] = temp[i]; // Saved bottom row of TOP -> right column of LEFT
 }
-void Cube::middle_wide_layer_R();
+
+void Cube::middle_wide_layer_R(){
+  // Shift colors on the side
+  vector<char> temp(3);
+  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[TOP][1][i]; // Save middle row of TOP face
+  for (int i = 0; i < 3; i++) cubeFaces[TOP][1][i] = cubeFaces[LEFT][2 - i][1]; // middle column of LEFT -> middle row of TOP
+  for (int i = 0; i < 3; i++) cubeFaces[LEFT][i][1] = cubeFaces[BOTTOM][1][2 - i]; // middle row of BOTTOM -> middle column of LEFT
+  for (int i = 0; i < 3; i++) cubeFaces[BOTTOM][1][i] = cubeFaces[RIGHT][i][1]; // middle column of RIGHT -> middle row of BOTTOM
+  for (int i = 0; i < 3; i++) cubeFaces[RIGHT][i][1] = temp[i]; // Saved middle row of TOP -> middle column of RIGHT
+}
 void Cube::middle_wide_layer_L();
 void Cube::back_layer_R();
 void Cube::back_layer_L();
