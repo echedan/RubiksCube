@@ -1,7 +1,8 @@
 #ifndef CUBE_H
 #define CUBE_H
+#include "Headers.h"
 
-class Cube{
+class Cube {
   public:
     enum Face {
       WHITE = 0,
@@ -49,7 +50,7 @@ class Cube{
     static constexpr int NUM_FACES = 6;
     static constexpr int ROWS = 3;
     static constexpr int COLS = 3;
-    vector<vector<vector<char>>> cubeFaces = vector<vector<vector<char>>>(NUM_FACES, vector<vector<char>>(ROWS, vector<char>(COLS)));
+    vector<vector<vector<char>>> cubeFaces;
 };
 
 #endif
