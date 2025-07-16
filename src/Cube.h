@@ -4,16 +4,16 @@
 class Cube{
   public:
     enum Face {
-      FRONT = 0,
-      BACK = 1,
-      LEFT = 2,
-      RIGHT = 3,
-      TOP = 4,
-      BOTTOM = 5
+      FRONT = 0, //White
+      BACK = 1, //Yellow
+      LEFT = 2, //Green
+      RIGHT = 3, //Blue
+      TOP = 4, //Orange
+      BOTTOM = 5 //Red
     };
 
-    //Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
-    void applyMove(string move); // selects one of the moves below
+    Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
+    /*void applyMove(string move); // selects one of the moves below
     bool isSolved(); // checks if every side is one color
     string getStateHash(); // not really sure what this one is for
 
@@ -44,13 +44,14 @@ class Cube{
     void middle_vertical_D();
     void right_vertical_U();
     void right_vertical_D();
-    
+    */
   private:
     static constexpr int NUM_FACES = 6;
     static constexpr int ROWS = 3;
     static constexpr int COLS = 3;
     vector<vector<vector<char>>> cubeFaces = vector<vector<vector<char>>>(NUM_FACES, vector<vector<char>>(ROWS, vector<char>(COLS)));
     int opposite_face(int current_face);
+    
 };
 
 #endif

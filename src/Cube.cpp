@@ -8,7 +8,7 @@ using namespace std;
 Cube::Cube(vector<vector<vector<char>>> newFaces){
   cubeFaces = newFaces;
 }
-
+/*
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
@@ -156,3 +156,4 @@ int opposite_face(int current_face) {
     if (current_face % 2 == 0) return current_face + 1; // even
     else return current_face - 1; // odd
 }
+*/
