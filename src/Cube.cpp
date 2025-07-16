@@ -4,7 +4,7 @@
 Cube::Cube(vector<vector<vector<char>>> newFaces){
   cubeFaces = newFaces;
 }
-/*
+
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
@@ -241,4 +241,3 @@ void Cube::R_counter_clockwise(){
   for (int i = 0; i < 3; i++) cubeFaces[YELLOW][i][2] = cubeFaces[GREEN][i][2]; // Right column of green -> right column of yellow
   for (int i = 0; i < 3; i++) cubeFaces[GREEN][i][2] = temp[i]; // Saved right column of white -> right column of green
 }
-*/
