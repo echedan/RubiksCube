@@ -8,7 +8,69 @@ Cube::Cube(vector<vector<vector<char>>> newFaces){
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
-    // i do later
+    case "W":
+      W_clockwise();
+      break;
+    case "W'":
+      W_counter_clockwise();
+      break;
+    case "Y":
+      Y_clockwise();
+      break;
+    case "Y'":
+      Y_counter_clockwise();
+      break; 
+    case "G":
+      G_clockwise();
+      break;
+    case "G'":
+      G_counter_clockwise();
+      break;
+    case "B":
+      B_clockwise();
+      break;
+    case "B'":
+      B_counter_clockwise();
+      break;
+    case "O":
+      O_clockwise();
+      break;
+    case "O'":
+      O_counter_clockwise();
+      break;
+    case "R":
+      R_clockwise();
+      break;
+    case "R'":
+      R_counter_clockwise();
+      break;
+    case "WY":
+      W_clockwise();
+      Y_counter_clockwise();
+      break;
+    case "WY'":
+      Y_clockwise();
+      W_counter_clockwise();
+      break;
+    case "GB":
+      G_clockwise();
+      B_counter_clockwise();
+      break;
+    case "GB'":
+      B_clockwise();
+      G_counter_clockwise();
+      break;
+    case "OR":
+      O_clockwise();
+      R_counter_clockwise();
+      break;
+    case "OR'":
+      R_clockwise();
+      O_counter_clockwise();
+      break;
+    default:
+      cout << "Invalid move" << endl;
+      break;
   }
 }
 
