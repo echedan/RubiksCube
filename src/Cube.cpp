@@ -1,14 +1,10 @@
 #include "Cube.h"
-#include <iostream>
-#include <vector>
-
-using namespace std;
 
 // read the input from utilities class then use it to init the cube
 Cube::Cube(vector<vector<vector<char>>> newFaces){
   cubeFaces = newFaces;
 }
-
+/*
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
@@ -189,3 +185,4 @@ int opposite_face(int current_face) {
     if (current_face % 2 == 0) return current_face + 1; // even
     else return current_face - 1; // odd
 }
+*/
