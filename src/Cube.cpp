@@ -23,7 +23,7 @@ void Cube::applyMove(string move){
     case "G":
       G_clockwise();
       break;
-    case "G':
+    case "G'":
       G_counter_clockwise();
       break;
     case "B":
