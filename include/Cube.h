@@ -1,15 +1,16 @@
 #ifndef CUBE_H
 #define CUBE_H
 #include "Headers.h"
-class Cube{
+
+class Cube {
   public:
     enum Face {
-      FRONT = 0, //White
-      BACK = 1, //Yellow
-      LEFT = 2, //Green
-      RIGHT = 3, //Blue
-      TOP = 4, //Orange
-      BOTTOM = 5 //Red
+      WHITE = 0,
+      YELLOW = 1,
+      GREEN = 2,
+      BLUE = 3,
+      ORANGE = 4,
+      RED = 5
     };
 
     Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
@@ -18,40 +19,38 @@ class Cube{
     string getStateHash(); // not really sure what this one is for
 
     // -------------------------------------------------------
-    // 18 possible moves. I tried to make the names make sense
+    // 12 moves (can be combined to simulate more moves)
     // -------------------------------------------------------
 
-    // The layer that you are looking at and the 2 layers behind it
-    void layer_facing_you_R();
-    void layer_facing_you_L();
-    void middle_wide_layer_R();
-    void middle_wide_layer_L();
-    void back_layer_R();
-    void back_layer_L();
+    // White face
+    void W_clockwise();
+    void W_counter_clockwise();
 
-    // Horizontal layers
-    void top_horizontal_R();
-    void top_horizontal_L();
-    void middle_horizontal_R();
-    void middle_horizontal_L();
-    void bottom_horizontal_R();
-    void bottom_horizontal_L();
+    // Yellow face
+    void Y_clockwise();
+    void Y_counter_clockwise();
 
-    // Vertical layers (they go up and down, not left and right)
-    void left_vertical_U();
-    void left_vertical_D();
-    void middle_vertical_U();
-    void middle_vertical_D();
-    void right_vertical_U();
-    void right_vertical_D();
+    // Green face
+    void G_clockwise();
+    void G_counter_clockwise();
+
+    // Blue face
+    void B_clockwise();
+    void B_counter_clockwise();
+
+    // Orange face
+    void O_clockwise();
+    void O_counter_clockwise();
+
+    // Red face
+    void R_clockwise();
+    void R_counter_clockwise();
     
   private:
     static constexpr int NUM_FACES = 6;
     static constexpr int ROWS = 3;
     static constexpr int COLS = 3;
-    vector<vector<vector<char>>> cubeFaces; //= vector<vector<vector<char>>>(NUM_FACES, vector<vector<char>>(ROWS, vector<char>(COLS)));
-    int opposite_face(int current_face);
-    
+    vector<vector<vector<char>>> cubeFaces;
 };
 
 #endif
