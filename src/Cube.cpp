@@ -1,4 +1,4 @@
-#include "Cube.h"
+#include "include/Cube.h"
 
 // read the input from utilities class then use it to init the cube
 Cube::Cube(vector<vector<vector<char>>> newFaces){

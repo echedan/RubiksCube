@@ -1,7 +1,7 @@
-#include "Cube.h"
-#include "Solver.h"
-#include "Utilities.h"
-#include "Headers.h"
+#include "include/Cube.h"
+#include "include/Solver.h"
+#include "include/Utilities.h"
+#include "include/Headers.h"
 Cube* readCube()
 {
     //Vector to be passed to constructor
