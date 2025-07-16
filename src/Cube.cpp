@@ -1,8 +1,4 @@
 #include "Cube.h"
-#include <iostream>
-#include <vector>
-
-using namespace std;
 
 // read the input from utilities class then use it to init the cube
 Cube::Cube(vector<vector<vector<char>>> newFaces){

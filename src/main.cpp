@@ -4,15 +4,9 @@
 Cube* readCube()
 {
     //Vector to be passed to constructor
-    vector<vector<vector<char>>> conVec;
+    vector<vector<vector<char>>> conVec = vector<vector<vector<char>>>(6, vector<vector<char>>());
     //Temporary vector stores side of cube;
-    vector<vector<char>> temp;
-    //Initilatizing vectors
-    for(int i = 0; i < 6; ++i)
-    {
-        conVec.push_back({});
-        if(i % 2 == 1){temp.push_back({});}
-    }
+    vector<vector<char>> temp; 
     bool exists = false;
     string file;
     ifstream iFile;
@@ -35,11 +29,11 @@ Cube* readCube()
         }
     }
     //Colors are read into vector from file
-    while(!iFile.eof())
+    while(getline(iFile, file))
     {
-        getline(iFile, file);
         itter = 0;
-        color = file[5];
+        color = file[4];
+        temp = vector<vector<char>>(3, vector<char>());
         for(int i = 0; i < 9; ++i)
         {
             if(i % 3 == 0 && i != 0)
@@ -54,12 +48,10 @@ Cube* readCube()
         else if(color == 'B'){conVec[3] = temp;}
         else if(color == 'O'){conVec[4] = temp;}
         else if(color == 'R'){conVec[5] = temp;}
-        temp[0].clear();
-        temp[1].clear();
-        temp[2].clear();
     }
     iFile.close();
     //Test
+    /*
     for(int i = 0; i < 6; ++i)
     {
         for(int j = 0; j < 3; ++j)
@@ -72,14 +64,15 @@ Cube* readCube()
         }
         cout << endl;
     }
+
     return new Cube(conVec);
+    */
 }
 int main()
 {
     //Read in vector
     Cube *c;
     c = readCube();
-
     //clean up
     delete c;
     return 0; 
