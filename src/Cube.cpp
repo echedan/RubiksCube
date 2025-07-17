@@ -88,7 +88,17 @@ bool Cube::isSolved(){
 }
 
 // not really sure what this one is for
-string Cube::getStateHash();
+string Cube::getStateHash(){
+  string hash = "";
+  for(int i = 0; i < NUM_FACES; i++){
+    for(int j = 0; j < ROWS; j++){
+      for(int k = 0; k < COLS; k++){
+        hash += cubeFaces[i][j][k];
+      }
+    }
+  }
+  return hash;
+}
 
 // -------------------------------------------------------
 // 12 moves (they can be combined to simulate more moves)
@@ -109,8 +119,8 @@ void Cube::W_clockwise(){
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[ORANGE][0][i]; // Save top row of orange
   for (int i = 0; i < 3; i++) cubeFaces[ORANGE][0][i] = cubeFaces[GREEN][0][i]; // Top row of green -> top row of orange
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][0][i] = cubeFaces[RED][0][i] // Top row of red -> top row of green
-  for (int i = 0; i < 3; i++) cubeFaces[RED][0][i] = cubeFaces[BLUE][0][i] // Top row of blue -> top row of red
+  for (int i = 0; i < 3; i++) cubeFaces[GREEN][0][i] = cubeFaces[RED][0][i]; // Top row of red -> top row of green
+  for (int i = 0; i < 3; i++) cubeFaces[RED][0][i] = cubeFaces[BLUE][0][i]; // Top row of blue -> top row of red
   for (int i = 0; i < 3; i++) cubeFaces[BLUE][0][i] = temp[i]; // Saved top row of orange -> top row of blue
 }
 void Cube::W_counter_clockwise(){
@@ -124,8 +134,8 @@ void Cube::W_counter_clockwise(){
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[ORANGE][0][i]; // Save top row of orange
   for (int i = 0; i < 3; i++) cubeFaces[ORANGE][0][i] = cubeFaces[BLUE][0][i]; // Top row of blue -> top row of orange
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][0][i] = cubeFaces[RED][0][i] // Top row of red -> top row of blue
-  for (int i = 0; i < 3; i++) cubeFaces[RED][0][i] = cubeFaces[GREEN][0][i] // Top row of green -> top row of red
+  for (int i = 0; i < 3; i++) cubeFaces[BLUE][0][i] = cubeFaces[RED][0][i]; // Top row of red -> top row of blue
+  for (int i = 0; i < 3; i++) cubeFaces[RED][0][i] = cubeFaces[GREEN][0][i]; // Top row of green -> top row of red
   for (int i = 0; i < 3; i++) cubeFaces[GREEN][0][i] = temp[i]; // Saved top row of orange -> top row of green
 }
 
@@ -144,8 +154,8 @@ void Cube::Y_clockwise(){
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[ORANGE][2][i]; // Save bottom row of orange
   for (int i = 0; i < 3; i++) cubeFaces[ORANGE][2][i] = cubeFaces[BLUE][2][i]; // Bottom row of blue -> bottom row of orange
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][2][i] = cubeFaces[RED][2][i] // Bottom row of red -> bottom row of blue
-  for (int i = 0; i < 3; i++) cubeFaces[RED][2][i] = cubeFaces[GREEN][2][i] // Bottom row of green -> bottom row of red
+  for (int i = 0; i < 3; i++) cubeFaces[BLUE][2][i] = cubeFaces[RED][2][i]; // Bottom row of red -> bottom row of blue
+  for (int i = 0; i < 3; i++) cubeFaces[RED][2][i] = cubeFaces[GREEN][2][i]; // Bottom row of green -> bottom row of red
   for (int i = 0; i < 3; i++) cubeFaces[GREEN][2][i] = temp[i]; // Saved bottom row of orange -> bottom row of green
 }
 void Cube::Y_counter_clockwise(){
@@ -159,8 +169,8 @@ void Cube::Y_counter_clockwise(){
   vector<char> temp(3);
   for (int i = 0; i < 3; i++) temp[i] = cubeFaces[ORANGE][2][i]; // Save bottom row of orange
   for (int i = 0; i < 3; i++) cubeFaces[ORANGE][2][i] = cubeFaces[GREEN][2][i]; // Bottom row of green -> bottom row of orange
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][2][i] = cubeFaces[RED][2][i] // Bottom row of red -> bottom row of green
-  for (int i = 0; i < 3; i++) cubeFaces[RED][2][i] = cubeFaces[BLUE][2][i] // Bottom row of blue -> bottom row of red
+  for (int i = 0; i < 3; i++) cubeFaces[GREEN][2][i] = cubeFaces[RED][2][i]; // Bottom row of red -> bottom row of green
+  for (int i = 0; i < 3; i++) cubeFaces[RED][2][i] = cubeFaces[BLUE][2][i]; // Bottom row of blue -> bottom row of red
   for (int i = 0; i < 3; i++) cubeFaces[BLUE][2][i] = temp[i]; // Saved bottom row of orange -> bottom row of blue
 }
 
