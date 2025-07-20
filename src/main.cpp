@@ -1,18 +1,16 @@
-#include "include/Cube.h"
-#include "include/Solver.h"
-#include "include/Utilities.h"
-#include "include/Headers.h"
+#include "Cube.h"
+#include "Solver.h"
+#include "Utilities.h"
+#include "Headers.h"
 Cube* readCube()
 {
-    //Vector to be passed to constructor
-    vector<vector<vector<char>>> conVec = vector<vector<vector<char>>>(6, vector<vector<char>>());
-    //Temporary vector stores side of cube;
-    vector<vector<char>> temp; 
+    //Vector to store colors only - will validate and assign piece IDs later
+    vector<vector<char>> colorData = vector<vector<char>>(6, vector<char>(9));
     bool exists = false;
     string file;
     ifstream iFile;
-    int itter;
-    char color;
+    char faceColor;
+    
     //Reads in/Checks for file name and then opens it 
     while(exists == false)
     {
@@ -29,44 +27,26 @@ Cube* readCube()
             exists = true;
         }
     }
-    //Colors are read into vector from file
-    while(getline(iFile, file))
+    
+    //Colors are read into vector from file in order: Yellow, Orange, Green, White, Red, Blue
+    int currentFace = 0;
+    while(getline(iFile, file) && currentFace < 6)
     {
-        itter = 0;
-        color = file[4];
-        temp = vector<vector<char>>(3, vector<char>());
-        for(int i = 0; i < 9; ++i)
-        {
-            if(i % 3 == 0 && i != 0)
-            {
-                ++itter;
+        if(file.length() < 9) continue; // Skip invalid lines (need at least 9 characters)
+        
+        // Store the 9 face colors for the current face (reading in sequence)
+        for(int i = 0; i < 9; ++i) {
+            if(i < file.length()) {
+                colorData[currentFace][i] = file[i];
             }
-            temp[itter].push_back(file[i]);
         }
-        if(color == 'W'){conVec[0] = temp;}
-        else if(color == 'Y'){conVec[1] = temp;}
-        else if(color == 'G'){conVec[2] = temp;}
-        else if(color == 'B'){conVec[3] = temp;}
-        else if(color == 'O'){conVec[4] = temp;}
-        else if(color == 'R'){conVec[5] = temp;}
+        
+        currentFace++; // Move to next face after each line
     }
     iFile.close();
-    //Test
-    /*
-    for(int i = 0; i < 6; ++i)
-    {
-        for(int j = 0; j < 3; ++j)
-        {
-            for(int k = 0; k < 3; ++k)
-            {
-                cout << conVec[i][j][k];
-            }
-            cout << endl;
-        }
-        cout << endl;
-    }
-
-    return new Cube(conVec);
+    
+    // Create cube with color validation and piece assignment
+    return new Cube(colorData);
 }
 int main()
 {
