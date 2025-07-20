@@ -67,13 +67,32 @@ Cube* readCube()
     }
 
     return new Cube(conVec);
-    */
 }
 int main()
 {
+    cout << "=== Rubik's Cube BFS Solver ===" << endl;
+    
     //Read in vector
     Cube *c;
     c = readCube();
+    
+    if (c != nullptr) {
+        cout << "\nCube loaded successfully!" << endl;
+        
+        // Check if cube is already solved
+        if (c->isSolved()) {
+            cout << "Cube is already solved!" << endl;
+        } else {
+            cout << "Cube needs solving. Starting BFS search..." << endl;
+            
+            // Solve using BFS
+            vector<string> solution = Solver::solveBFS(*c, 10); // Start with depth 10
+            
+            // Print the solution
+            Solver::printSolution(solution);
+        }
+    }
+    
     //clean up
     delete c;
     return 0; 
