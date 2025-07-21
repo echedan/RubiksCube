@@ -211,33 +211,33 @@ void Cube::G_counter_clockwise(){
 
 void Cube::B_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[BLUE];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[BLUE][j][2 - i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[BLUE];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[BLUE][3*i+2] = tempFace[i];
+    else if(i > 5) cubeFaces[BLUE][3*i-18] = tempFace[i];
+    else cubeFaces[BLUE][3*i-8] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][0][i]; // Save top row of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][0][i] = cubeFaces[RED][i][2]; // Right column of red -> top row of white
-  for (int i = 0; i < 3; i++) cubeFaces[RED][2-i][2] = cubeFaces[YELLOW][2][i]; // Bottom row of yellow -> right column of red
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][2][i] = cubeFaces[ORANGE][i][0]; // Left column of orange -> bottom row of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[ORANGE][2-i][0] = temp[i]; // Saved top row of white -> left column of orange
+  vector<char> temp = {cubeFaces[YELLOW][0], cubeFaces[YELLOW][1], cubeFaces[YELLOW][2]}; // Save top row of yellow
+  cubeFaces[YELLOW][0] = cubeFaces[ORANGE][2]; cubeFaces[YELLOW][1] = cubeFaces[ORANGE][5]; cubeFaces[YELLOW][2] = cubeFaces[ORANGE][8]; // Right column of orange -> top row of yellow
+  cubeFaces[ORANGE][2] = cubeFaces[WHITE][8]; cubeFaces[ORANGE][5] = cubeFaces[WHITE][7]; cubeFaces[ORANGE][8] = cubeFaces[WHITE][6]; // Bottom row of white -> right column of orange
+  cubeFaces[WHITE][6] = cubeFaces[RED][0]; cubeFaces[WHITE][7] = cubeFaces[RED][3]; cubeFaces[WHITE][8] = cubeFaces[RED][6]; // Left column of red -> bottom row of white
+  cubeFaces[RED][0] = temp[2]; cubeFaces[RED][3] = temp[1]; cubeFaces[RED][6] = temp[0]; // Saved top row of yellow -> left column of red
 }
 void Cube::B_counter_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[BLUE];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[BLUE][2 - j][i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[BLUE];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[BLUE][-3*i+6] = tempFace[i];
+    else if(i > 5) cubeFaces[BLUE][-3*i+26] = tempFace[i];
+    else cubeFaces[BLUE][-3*i+16] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][0][i]; // Save top row of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][0][2-i] = cubeFaces[ORANGE][i][0]; // Left column of orange -> top row of white
-  for (int i = 0; i < 3; i++) cubeFaces[ORANGE][i][0] = cubeFaces[YELLOW][2][i]; // Bottom row of yellow -> left column of orange
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][2][2-i] = cubeFaces[RED][i][2]; // Right column of red -> bottom row of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[RED][i][2] = temp[i]; // Saved top row of white -> right column of red
+  vector<char> temp = {cubeFaces[YELLOW][0], cubeFaces[YELLOW][1], cubeFaces[YELLOW][2]}; // Save top row of yellow
+  cubeFaces[YELLOW][0] = cubeFaces[RED][6]; cubeFaces[YELLOW][1] = cubeFaces[RED][3]; cubeFaces[YELLOW][2] = cubeFaces[RED][0]; // Left column of red -> top row of yellow
+  cubeFaces[RED][0] = cubeFaces[WHITE][6]; cubeFaces[RED][3] = cubeFaces[WHITE][7]; cubeFaces[RED][6] = cubeFaces[WHITE][8]; // Bottom row of white -> left column of red
+  cubeFaces[WHITE][6] = cubeFaces[ORANGE][8]; cubeFaces[WHITE][7] = cubeFaces[ORANGE][5]; cubeFaces[WHITE][8] = cubeFaces[ORANGE][2]; // Right column of orange -> bottom row of white
+  cubeFaces[ORANGE][2] = temp[0]; cubeFaces[ORANGE][5] = temp[1]; cubeFaces[ORANGE][8] = temp[2];// Saved top row of yellow -> right column of orange
 }
 
 // ============================================================================================================================
@@ -246,33 +246,33 @@ void Cube::B_counter_clockwise(){
 
 void Cube::O_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[ORANGE];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[ORANGE][j][2 - i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[ORANGE];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[ORANGE][3*i+2] = tempFace[i];
+    else if(i > 5) cubeFaces[ORANGE][3*i-18] = tempFace[i];
+    else cubeFaces[ORANGE][3*i-8] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][i][0]; // Save left column of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][i][0] = cubeFaces[BLUE][i][2]; // Right column of blue -> left column of white
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][i][2] = cubeFaces[YELLOW][i][0]; // Left column of yellow -> right column of blue
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][i][0] = cubeFaces[GREEN][i][0]; // Left column of green -> left column of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][i][0] = temp[i]; // Saved left column of white -> left column of green
+  vector<char> temp = {cubeFaces[YELLOW][2], cubeFaces[YELLOW][5], cubeFaces[YELLOW][8]}; // Save right column of yellow
+  cubeFaces[YELLOW][2] = cubeFaces[GREEN][2]; cubeFaces[YELLOW][5] = cubeFaces[GREEN][5]; cubeFaces[YELLOW][8] = cubeFaces[GREEN][8]; // Right column of green -> right column of yellow
+  cubeFaces[GREEN][2] = cubeFaces[WHITE][2]; cubeFaces[GREEN][5] = cubeFaces[WHITE][5]; cubeFaces[GREEN][8] = cubeFaces[WHITE][8]; // Right columh of white -> right column of green
+  cubeFaces[WHITE][2] = cubeFaces[BLUE][0]; cubeFaces[WHITE][5] = cubeFaces[BLUE][3]; cubeFaces[WHITE][8] = cubeFaces[BLUE][6]; // Left column of blue -> right column of white
+  cubeFaces[BLUE][0] = temp[0]; cubeFaces[BLUE][3] = temp[1]; cubeFaces[BLUE][6] = temp[2]; // Saved right column of yellow -> left column of blue
 }
 void Cube::O_counter_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[ORANGE];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[ORANGE][2 - j][i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[ORANGE];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[ORANGE][-3*i+6] = tempFace[i];
+    else if(i > 5) cubeFaces[ORANGE][-3*i+26] = tempFace[i];
+    else cubeFaces[ORANGE][-3*i+16] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][i][0]; // Save left column of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][i][0] = cubeFaces[GREEN][i][0]; // Left column of green -> left column of white
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][i][0] = cubeFaces[YELLOW][i][0]; // Left column of yellow -> left column of green
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][i][0] = cubeFaces[BLUE][i][2]; // Right column of blue -> left column of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][i][2] = temp[i]; // Saved left column of white -> right column of blue
+  vector<char> temp = {cubeFaces[YELLOW][2], cubeFaces[YELLOW][5], cubeFaces[YELLOW][8]}; // Save right column of yellow
+  cubeFaces[YELLOW][2] = cubeFaces[BLUE][0]; cubeFaces[YELLOW][5] = cubeFaces[BLUE][3]; cubeFaces[YELLOW][8] = cubeFaces[BLUE][6]; // Left column of blue -> right column of yellow
+  cubeFaces[BLUE][0] = cubeFaces[WHITE][2]; cubeFaces[BLUE][3] = cubeFaces[WHITE][5]; cubeFaces[BLUE][6] = cubeFaces[WHITE][8]; // Right column of white -> left column of blue
+  cubeFaces[WHITE][2] = cubeFaces[GREEN][2]; cubeFaces[WHITE][5] = cubeFaces[GREEN][5]; cubeFaces[WHITE][8] = cubeFaces[GREEN][8]; // Right column of green -> right column of white
+  cubeFaces[GREEN][2] = temp[0]; cubeFaces[GREEN][5] = temp[1]; cubeFaces[GREEN][8] = temp[2]; // Saved right column of yellow -> right column of green
 }
 
 // ============================================================================================================================
@@ -281,31 +281,31 @@ void Cube::O_counter_clockwise(){
 
 void Cube::R_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[RED];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[RED][j][2 - i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[RED];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[RED][3*i+2] = tempFace[i];
+    else if(i > 5) cubeFaces[RED][3*i-18] = tempFace[i];
+    else cubeFaces[RED][3*i-8] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][i][2]; // Save right column of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][i][2] = cubeFaces[GREEN][i][2]; // Right column of green -> right column of white
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][i][2] = cubeFaces[YELLOW][i][2]; // Right column of yellow -> right column of green
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][i][2] = cubeFaces[BLUE][i][0]; // Left column of blue -> right column of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][i][0] = temp[i]; // Saved right column of white -> left column of blue
+  vector<char> temp = {cubeFaces[YELLOW][0], cubeFaces[YELLOW][3], cubeFaces[YELLOW][6]}; // Save left column of yellow
+  cubeFaces[YELLOW][0] = cubeFaces[BLUE][2]; cubeFaces[YELLOW][3] = cubeFaces[BLUE][5]; cubeFaces[YELLOW][6] = cubeFaces[BLUE][8]; // Right column of blue -> left column of yellow
+  cubeFaces[BLUE][2] = cubeFaces[WHITE][0]; cubeFaces[BLUE][5] = cubeFaces[WHITE][3]; cubeFaces[BLUE][8] = cubeFaces[WHITE][6]; // Left column of white -> right column of blue
+  cubeFaces[WHITE][0] = cubeFaces[GREEN][0]; cubeFaces[WHITE][3] = cubeFaces[GREEN][3]; cubeFaces[WHITE][6] = cubeFaces[GREEN][6]; // Left column of green -> left column of white
+  cubeFaces[GREEN][0] = temp[0]; cubeFaces[GREEN][3] = temp[1]; cubeFaces[GREEN][6] = temp[2]; // Saved left column of yellow -> left column of green
 }
 void Cube::R_counter_clockwise(){
   // Shift colors on face
-  vector<vector<char>> tempFace = cubeFaces[RED];
-  for(int i = 0; i < ROWS; i++){
-    for(int j = 0; j < COLS; j++){
-      cubeFaces[RED][2 - j][i] = tempFace[i][j];
-  }}
+  vector<char> tempFace = cubeFaces[RED];
+  for(int i = 0; i < SQUARES; i++){
+    if(i < 3) cubeFaces[RED][-3*i+6] = tempFace[i];
+    else if(i > 5) cubeFaces[RED][-3*i+26] = tempFace[i];
+    else cubeFaces[RED][-3*i+16] = tempFace[i];
+  }
   // Shift colors on side
-  vector<char> temp(3);
-  for (int i = 0; i < 3; i++) temp[i] = cubeFaces[WHITE][i][2]; // Save right column of white
-  for (int i = 0; i < 3; i++) cubeFaces[WHITE][i][2] = cubeFaces[BLUE][i][0]; // Left column of blue -> right column of white
-  for (int i = 0; i < 3; i++) cubeFaces[BLUE][i][0] = cubeFaces[YELLOW][i][2]; // Right column of yellow -> left column of blue
-  for (int i = 0; i < 3; i++) cubeFaces[YELLOW][i][2] = cubeFaces[GREEN][i][2]; // Right column of green -> right column of yellow
-  for (int i = 0; i < 3; i++) cubeFaces[GREEN][i][2] = temp[i]; // Saved right column of white -> right column of green
+  vector<char> temp = {cubeFaces[YELLOW][0], cubeFaces[YELLOW][3], cubeFaces[YELLOW][6]}; // Save left column of yellow
+  cubeFaces[YELLOW][0] = cubeFaces[GREEN][0]; cubeFaces[YELLOW][3] = cubeFaces[GREEN][3]; cubeFaces[YELLOW][6] = cubeFaces[GREEN][6]; // Left column of green -> left column of yellow
+  cubeFaces[GREEN][0] = cubeFaces[WHITE][0]; cubeFaces[GREEN][3] = cubeFaces[WHITE][3]; cubeFaces[GREEN][6] = cubeFaces[WHITE][6]; // Left column of white -> left column of green
+  cubeFaces[WHITE][0] = cubeFaces[BLUE][2]; cubeFaces[WHITE][3] = cubeFaces[BLUE][5]; cubeFaces[WHITE][6] = cubeFaces[BLUE][8]; // Right column of blue -> left column of white
+  cubeFaces[BLUE][2] = temp[0]; cubeFaces[BLUE][5] = temp[1]; cubeFaces[BLUE][8] = temp[2]; // Saved left column of yellow -> right column of blue
 }
