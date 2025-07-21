@@ -13,7 +13,7 @@ class Cube {
       RED = 5
     };
 
-    Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
+    Cube(vector<vector<char>> newFaces); // read the input from utilities class then use it to init the cube
     void applyMove(string move); // selects one of the moves below
     bool isSolved(); // checks if every side is one color
     string getStateHash(); // not really sure what this one is for
@@ -48,9 +48,8 @@ class Cube {
     
   private:
     static constexpr int NUM_FACES = 6;
-    static constexpr int ROWS = 3;
-    static constexpr int COLS = 3;
-    vector<vector<vector<char>>> cubeFaces;
+    static constexpr int SQUARES = 9;
+    vector<vector<char>> cubeFaces;
 };
 
 #endif
