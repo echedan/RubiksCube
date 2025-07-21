@@ -18,12 +18,20 @@ bool validateCube(vector<vector<vector<char>>> tCube)
             }
         }
     }
-
+    for(int i = 0; i < 6; ++i)
+    {
+        for(int j = 0; i < 3; ++j)
+        {
+            for(int k = 0; k < 3; ++k)
+            {
+                cout << tCube[i][j][k];
+            }
+        }
+    }
     for(int i = 0; i < 6; ++i)
     {
         color = cVec[i * 9];
-        //corn1 = vec[]
-        //if(vec)
+        //if()
     }
     return true;
 }
@@ -77,7 +85,7 @@ Cube* readCube()
     }
     iFile.close();
     //Test
-    /*
+
     for(int i = 0; i < 6; ++i)
     {
         for(int j = 0; j < 3; ++j)
@@ -90,12 +98,11 @@ Cube* readCube()
         }
         cout << endl;
     }
-*/
-    if(validateCube(conVec) == false)
+    /*if(validateCube(conVec) == false)
     {
         cout << "\nInvalid Rubik's cube\n\n";
         return readCube();
-    }
+    }*/
     return new Cube(conVec);
 }
 int main()
