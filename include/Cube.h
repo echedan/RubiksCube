@@ -17,6 +17,7 @@ class Cube {
     Cube(vector<vector<char>> colorData); 
     void applyMove(string move);
     bool isSolved();
+    bool isValid();  // Check if cube was properly initialized
     string getStateHash();
     
     // Validation and assignment functions
@@ -65,6 +66,7 @@ class Cube {
     
     // Store assigned piece IDs (Y0-Y8, O0-O8, G0-G8, W0-W8, R0-R8, B0-B8)
     vector<vector<string>> cubeFaces;  // Final piece assignments
+    bool valid;  // Track if cube was properly initialized
     
     // Helper functions for piece ID management
     string generatePieceID(char color, int globalIndex);

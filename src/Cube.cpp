@@ -4,25 +4,30 @@
 Cube::Cube(vector<vector<char>> colorData){
     // Initialize the cube faces storage
     cubeFaces = vector<vector<string>>(6, vector<string>(9));
+    valid = false;  // Start with invalid state
     
     // Step 1: Validate the color placement
     if (!validateColorPlacement(colorData)) {
         cout << "ERROR: Invalid cube color configuration!" << endl;
-        // Could throw exception here
-        return;
+        return; // Leave valid = false
     }
     
     // Step 2: Validate adjacency relationships
     if (!validateAdjacencies(colorData)) {
         cout << "ERROR: Invalid adjacency relationships!" << endl;
-        // Could throw exception here  
-        return;
+        return; // Leave valid = false
     }
     
     // Step 3: Assign correct piece IDs based on standard numbering
     assignPieceIDs(colorData);
     
+    valid = true;  // Mark as valid only if all validations passed
     cout << "Cube initialized with validated piece assignments." << endl;
+}
+
+// Check if cube was properly initialized
+bool Cube::isValid() {
+    return valid;
 }
 
 // selects one of the moves below

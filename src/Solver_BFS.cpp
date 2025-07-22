@@ -53,7 +53,7 @@ vector<string> Solver::solveBFS(Cube startCube, int maxDepth) {
             Cube newCube = currentState.cube;
             
             // Apply the move
-            newCube.applyMove(move);
+            //newCube.applyMove(move);
             
             // Get the state hash for the new cube
             string newStateHash = cubeToString(newCube);
