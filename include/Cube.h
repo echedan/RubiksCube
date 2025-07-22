@@ -47,10 +47,13 @@ class Cube {
     void R_clockwise();
     void R_counter_clockwise();
     
+    //White Cross Function
+    void crosser();
   private:
     static constexpr int NUM_FACES = 6;
     static constexpr int SQUARES = 9;
-    vector<vector<char>> cubeFaces;
+  protected:
+   vector<vector<char>> cubeFaces;
 };
 
 #endif
