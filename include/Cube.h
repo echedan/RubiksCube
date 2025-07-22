@@ -5,12 +5,12 @@
 class Cube {
   public:
     enum Face {
-      WHITE = 0,
-      YELLOW = 1,
+      YELLOW = 0,
+      ORANGE = 1,
       GREEN = 2,
-      BLUE = 3,
-      ORANGE = 4,
-      RED = 5
+      WHITE = 3,
+      RED = 4,
+      BLUE = 5
     };
 
     Cube(vector<vector<char>> newFaces); // read the input from utilities class then use it to init the cube
