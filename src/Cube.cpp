@@ -1,9 +1,9 @@
-#include "Cube.h"
+#include "../include/Cube.h"
 
 // Constructor: validates colors and assigns correct piece IDs
 Cube::Cube(vector<vector<char>> colorData){
     // Initialize the cube faces storage
-    cubeFaces = vector<vector<string>>(6, vector<string>(9));
+    cubeFaces = vector<vector<char>>(6, vector<char>(9));
     valid = false;  // Start with invalid state
     
     // Step 1: Validate the color placement
@@ -82,9 +82,9 @@ void Cube::applyMove(string move){
 // checks if every side is one color
 bool Cube::isSolved(){
   for(int i = 0; i < NUM_FACES; i++){
-    char faceColor = getColorFromPiece(cubeFaces[i][4]); // Center piece (position 4)
+    char faceColor = cubeFaces[i][4]; // Center piece (position 4)
     for(int j = 0; j < PIECES_PER_FACE; j++){
-      char pieceColor = getColorFromPiece(cubeFaces[i][j]);
+      char pieceColor = cubeFaces[i][j];
       if(pieceColor != faceColor) return false;
     }
   }
@@ -359,7 +359,7 @@ void Cube::assignPieceIDs(const vector<vector<char>>& colors) {
     // Clear existing assignments
     for (int face = 0; face < NUM_FACES; face++) {
         for (int pos = 0; pos < PIECES_PER_FACE; pos++) {
-            cubeFaces[face][pos] = "";
+            cubeFaces[face][pos] = ' ';
         }
     }
     
@@ -382,7 +382,7 @@ void Cube::assignPieceIDs(const vector<vector<char>>& colors) {
                 pieceID = determineCornerPieceID(colors, face, pos);
             }
             
-            cubeFaces[face][pos] = pieceID;
+            cubeFaces[face][pos] = pieceID[0];
         }
     }
     
@@ -713,17 +713,17 @@ bool Cube::areOppositeColors(char color1, char color2) {
 }
 
 // Get piece at specific position
-string Cube::getPiece(int face, int position) {
+/*string Cube::getPiece(int face, int position) {
     if (face >= 0 && face < NUM_FACES && position >= 0 && position < PIECES_PER_FACE) {
         return cubeFaces[face][position];
     }
     return "";
 }
-
+*/
 // Set piece at specific position  
 void Cube::setPiece(int face, int position, string pieceId) {
     if (face >= 0 && face < NUM_FACES && position >= 0 && position < PIECES_PER_FACE) {
-        cubeFaces[face][position] = pieceId;
+        cubeFaces[face][position] = pieceId[0];
     }
 }
 

@@ -1,20 +1,21 @@
-#include "Cube.h"
-#include "Solver.h"
-#include "Utilities.h"
-#include "Headers.h"
+#include "../include/Cube.h"
+#include "../include/Solver.h"
+#include "../include/Headers.h"
 Cube* readCube()
 {
-    //Vector to store colors only - will validate and assign piece IDs later
-    vector<vector<char>> colorData = vector<vector<char>>(6, vector<char>(9));
+    //Vector to be passed to constructor
+    vector<vector<char>> conVec = vector<vector<char>>(6, vector<char>());
+    vector<char> temp;
+    //Temporary vector stores side of cube;
     bool exists = false;
     string file;
     ifstream iFile;
-    char faceColor;
-    
+    int itter;
+    char color;
     //Reads in/Checks for file name and then opens it 
     while(exists == false)
     {
-        cout << "Please Enter the name of the cube file: ";
+        cout << "\nPlease Enter the name of the cube file\nMust be of the format:\nface1\nface2\n...\nOrder of faces doesn't matter\nFile Name: ";
         cin >> file;
         iFile.open(file);
         if(!iFile)
@@ -27,22 +28,16 @@ Cube* readCube()
             exists = true;
         }
     }
-    
-    //Colors are read into vector from file in order: Yellow, Orange, Green, White, Red, Blue
-    int currentFace = 0;
-    while(getline(iFile, file) && currentFace < 6)
+    //Colors are read into vector from file
+    while(getline(iFile, file))
     {
-        if(file.length() < 9) continue; // Skip invalid lines (need at least 9 characters)
-        
-        // Store the 9 face colors for the current face (reading in sequence)
-        for(int i = 0; i < 9; ++i) {
-            if(i < file.length()) {
-                colorData[currentFace][i] = file[i];
-            }
+        temp.clear();
+        itter = 0;
+        color = file[4];
+        for(int i = 0; i < 9; ++i)
+        {
+            temp.push_back(file[i]);
         }
-        
-        currentFace++; // Move to next face after each line
-
         if(color == 'Y'){conVec[0] = temp;}
         else if(color == 'O'){conVec[1] = temp;}
         else if(color == 'G'){conVec[2] = temp;}
@@ -51,9 +46,20 @@ Cube* readCube()
         else if(color == 'B'){conVec[5] = temp;}
     }
     iFile.close();
-    
-    // Create cube with color validation and piece assignment
-    return new Cube(colorData);
+    //Test
+    //start
+    cout << "\nFile Test\n";
+    for(int i = 0; i < 6; ++i)
+    {
+        for(int j = 0; j < 9; ++j)
+        {
+            cout << conVec[i][j];
+            cout << endl;
+        }
+        cout << endl;
+    }
+    //end
+    return new Cube(conVec);
 }
 Cube *lineCube()
 {

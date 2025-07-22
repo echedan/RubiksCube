@@ -66,7 +66,7 @@ class Cube {
     static constexpr int PIECES_PER_FACE = 9;
     
     // Store assigned piece IDs (Y0-Y8, O0-O8, G0-G8, W0-W8, R0-R8, B0-B8)
-    vector<vector<string>> cubeFaces;  // Final piece assignments
+    vector<vector<char>> cubeFaces;  // Final piece assignments
     bool valid;  // Track if cube was properly initialized
     
     // Helper functions for piece ID management
