@@ -3,6 +3,7 @@
 // read the input from utilities class then use it to init the cube
 Cube::Cube(vector<vector<char>> newFaces){
   cubeFaces = newFaces;
+  printCube();
 }
 
 // selects one of the moves below
@@ -94,6 +95,15 @@ string Cube::getStateHash(){
     }
   }
   return hash;
+}
+
+void Cube::printCube(){
+  for(int i = 0; i < NUM_FACES; i++){
+    for(int j = 0; j < SQUARES; j++){
+      cout << cubeFaces[i][j];
+    }
+    cout << endl;
+  }
 }
 
 // -------------------------------------------------------
