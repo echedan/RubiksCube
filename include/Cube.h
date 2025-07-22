@@ -16,7 +16,8 @@ class Cube {
     Cube(vector<vector<char>> newFaces); // read the input from utilities class then use it to init the cube
     void applyMove(string move); // selects one of the moves below
     bool isSolved(); // checks if every side is one color
-    string getStateHash(); // not really sure what this one is for
+    string getStateHash(); // returns hash state
+    void printCube(); // prints cube
 
     // -------------------------------------------------------
     // 12 moves (can be combined to simulate more moves)
