@@ -19,6 +19,7 @@ class Cube {
     bool isSolved();
     bool isValid();  // Check if cube was properly initialized
     string getStateHash();
+    void printCubeState();  // Debug function to show piece assignments
     
     // Validation and assignment functions
     bool validateColorPlacement(const vector<vector<char>>& colors);
@@ -73,6 +74,19 @@ class Cube {
     int getGlobalIndex(char color, int position);
     bool isValidAdjacency(char color1, char color2);
     bool areOppositeColors(char color1, char color2);
+    
+    // Adjacency-based piece assignment helpers
+    struct AdjacentPosition {
+        int face;
+        int position;
+        AdjacentPosition(int f, int p) : face(f), position(p) {}
+    };
+    
+    vector<AdjacentPosition> getAdjacentPositions(int face, int position);
+    string determineEdgePieceID(const vector<vector<char>>& colors, int face, int position);
+    string determineCornerPieceID(const vector<vector<char>>& colors, int face, int position);
+    int getEdgeIDFromAdjacency(char color1, char color2);
+    int getCornerIDFromAdjacency(char color1, char color2, char color3);
 };
 
 #endif

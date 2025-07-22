@@ -125,6 +125,9 @@ int main()
         
         cout << "\nCube loaded successfully!" << endl;
         
+        // Debug: Print piece assignments
+        c->printCubeState();
+        
         // Check if cube is already solved
         if (c->isSolved()) {
             cout << "Cube is already solved!" << endl;
