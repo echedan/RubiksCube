@@ -5,18 +5,31 @@
 class Cube {
   public:
     enum Face {
-      WHITE = 0,
-      YELLOW = 1,
-      GREEN = 2,
-      BLUE = 3,
-      ORANGE = 4,
-      RED = 5
+      YELLOW = 0,   // Top face
+      ORANGE = 1,   // Right face  
+      GREEN = 2,    // Front face
+      WHITE = 3,    // Bottom face
+      RED = 4,      // Left face
+      BLUE = 5      // Back face
     };
 
-    Cube(vector<vector<vector<char>>> newFaces); // read the input from utilities class then use it to init the cube
-    void applyMove(string move); // selects one of the moves below
-    bool isSolved(); // checks if every side is one color
-    string getStateHash(); // not really sure what this one is for
+    // Constructor: takes colors, validates, and assigns piece IDs
+    Cube(vector<vector<char>> colorData); 
+    void applyMove(string move);
+    bool isSolved();
+    string getStateHash();
+    
+    // Validation and assignment functions
+    bool validateColorPlacement(const vector<vector<char>>& colors);
+    bool validateAdjacencies(const vector<vector<char>>& colors);
+    void assignPieceIDs(const vector<vector<char>>& colors);
+    
+    // Piece access (returns piece IDs like "Y0", "W4", etc.)
+    string getPiece(int face, int position);
+    void setPiece(int face, int position, string pieceId);
+    
+    // Helper function to extract color from piece ID
+    char getColorFromPiece(const string& pieceId);
 
     // -------------------------------------------------------
     // 12 moves (can be combined to simulate more moves)
@@ -48,9 +61,16 @@ class Cube {
     
   private:
     static constexpr int NUM_FACES = 6;
-    static constexpr int ROWS = 3;
-    static constexpr int COLS = 3;
-    vector<vector<vector<char>>> cubeFaces;
+    static constexpr int PIECES_PER_FACE = 9;
+    
+    // Store assigned piece IDs (Y0-Y8, O0-O8, G0-G8, W0-W8, R0-R8, B0-B8)
+    vector<vector<string>> cubeFaces;  // Final piece assignments
+    
+    // Helper functions for piece ID management
+    string generatePieceID(char color, int globalIndex);
+    int getGlobalIndex(char color, int position);
+    bool isValidAdjacency(char color1, char color2);
+    bool areOppositeColors(char color1, char color2);
 };
 
 #endif
