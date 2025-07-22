@@ -42,6 +42,13 @@ Cube* readCube()
         }
         
         currentFace++; // Move to next face after each line
+
+        if(color == 'Y'){conVec[0] = temp;}
+        else if(color == 'O'){conVec[1] = temp;}
+        else if(color == 'G'){conVec[2] = temp;}
+        else if(color == 'W'){conVec[3] = temp;}
+        else if(color == 'R'){conVec[4] = temp;}
+        else if(color == 'B'){conVec[5] = temp;}
     }
     iFile.close();
     
