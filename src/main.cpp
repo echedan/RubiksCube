@@ -1,22 +1,20 @@
-#include "../include/Cube.h"
-#include "../include/Solver.h"
-#include "../include/Utilities.h"
-#include "../include/Headers.h"
+#include "Cube.h"
+#include "Solver.h"
+#include "Utilities.h"
+#include "Headers.h"
 Cube* readCube()
 {
-    //Vector to be passed to constructor
-    vector<vector<char>> conVec = vector<vector<char>>(6, vector<char>());
-    vector<char> temp;
-    //Temporary vector stores side of cube;
+    //Vector to store colors only - will validate and assign piece IDs later
+    vector<vector<char>> colorData = vector<vector<char>>(6, vector<char>(9));
     bool exists = false;
     string file;
     ifstream iFile;
-    int itter;
-    char color;
+    char faceColor;
+    
     //Reads in/Checks for file name and then opens it 
     while(exists == false)
     {
-        cout << "\nPlease Enter the name of the cube file\nMust be of the format:\nface1\nface2\n...\nOrder of faces doesn't matter\nFile Name: ";
+        cout << "Please Enter the name of the cube file: ";
         cin >> file;
         iFile.open(file);
         if(!iFile)
@@ -29,16 +27,22 @@ Cube* readCube()
             exists = true;
         }
     }
-    //Colors are read into vector from file
-    while(getline(iFile, file))
+    
+    //Colors are read into vector from file in order: Yellow, Orange, Green, White, Red, Blue
+    int currentFace = 0;
+    while(getline(iFile, file) && currentFace < 6)
     {
-        temp.clear();
-        itter = 0;
-        color = file[4];
-        for(int i = 0; i < 9; ++i)
-        {
-            temp.push_back(file[i]);
+        if(file.length() < 9) continue; // Skip invalid lines (need at least 9 characters)
+        
+        // Store the 9 face colors for the current face (reading in sequence)
+        for(int i = 0; i < 9; ++i) {
+            if(i < file.length()) {
+                colorData[currentFace][i] = file[i];
+            }
         }
+        
+        currentFace++; // Move to next face after each line
+
         if(color == 'Y'){conVec[0] = temp;}
         else if(color == 'O'){conVec[1] = temp;}
         else if(color == 'G'){conVec[2] = temp;}
@@ -47,66 +51,34 @@ Cube* readCube()
         else if(color == 'B'){conVec[5] = temp;}
     }
     iFile.close();
-    //Test
-    //start
-    cout << "\nFile Test\n";
-    for(int i = 0; i < 6; ++i)
-    {
-        for(int j = 0; j < 9; ++j)
-        {
-            cout << conVec[i][j];
-            cout << endl;
-        }
-        cout << endl;
-    }
-    //end
-    return new Cube(conVec);
+    
+    // Create cube with color validation and piece assignment
+    return new Cube(colorData);
 }
 Cube *lineCube()
 {
     string cube;
-    vector<vector<char>> conVec = vector<vector<char>>(6, vector<char>());
+    vector<vector<char>> colorData = vector<vector<char>>(6, vector<char>(9));
     cout << "\nPlease enter all 54 faces of the cube\nExample RWBGROW...YO\nCube: ";
     cin >> cube;
     
-    //Test
-    cout << endl << "Cube: " << cube << endl;
-    int itter = 0;
-    for(int i = 0; i < cube.length(); ++i)
-    {
-        cout << endl << i;
-        if(i % 9 == 0 && i != 0)
-        {
-            //Test
-            //for(int j = 0; j < 9; ++j)
-            //{
-            //    cout << conVec[itter][j];
-            //}
-            ++itter;
-            //Test
-            //cout << "\nTest: Itter: " << itter;
-
+    // Parse the 54-character string into 6 faces of 9 characters each
+    int index = 0;
+    for(int face = 0; face < 6; face++) {
+        for(int pos = 0; pos < 9; pos++) {
+            if(index < cube.length()) {
+                colorData[face][pos] = cube[index];
+                index++;
+            }
         }
-        conVec[itter].push_back(cube[i]);
     }
-    //Test 
-    //start
-    cout << "\nCube in Line Test\n";
-    for(int i = 0; i < 6; ++i)
-    {
-        for(int j = 0; j < 9; ++j)
-        {
-            cout << conVec[i][j];
-            cout << endl;
-        }
-        cout << endl;
-    }
-    //end
-    return new Cube(conVec);
-
+    
+    return new Cube(colorData);
 }
+
 int main()
 {
+    cout << "=== Rubik's Cube BFS Solver ===" << endl;
     
     //Read in vector
     Cube *c;
@@ -114,8 +86,7 @@ int main()
     bool picked = false;
     while(picked == false)
     {
-        cout << "\n=== Rubik's Cube BFS Solver ==="
-             << "\n1. Input file"
+        cout << "\n1. Input file"
              << "\n2. From keyboard"
              << "\n3. Cancel"
              << "\nEnter how you want to load the cube: ";
@@ -134,25 +105,35 @@ int main()
         {
             picked = true;
         }
-
     }
+    
     switch(choice)
     {
         case 1:
             c = readCube();
-        break;
+            break;
         case 2: 
             c = lineCube();
-        break;
+            break;
         case 3:
             exit(1);
-        break;
+            break;
         default:
             exit(1);
-        break;
+            break;
     }
+    
     if (c != nullptr) {
+        if (!c->isValid()) {
+            cout << "\nCube initialization failed. Exiting." << endl;
+            delete c;
+            return 1;
+        }
+        
         cout << "\nCube loaded successfully!" << endl;
+        
+        // Debug: Print piece assignments
+        c->printCubeState();
         
         // Check if cube is already solved
         if (c->isSolved()) {

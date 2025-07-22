@@ -5,19 +5,33 @@
 class Cube {
   public:
     enum Face {
-      YELLOW = 0,
-      ORANGE = 1,
-      GREEN = 2,
-      WHITE = 3,
-      RED = 4,
-      BLUE = 5
+      YELLOW = 0,   // Top face
+      ORANGE = 1,   // Right face  
+      GREEN = 2,    // Front face
+      WHITE = 3,    // Bottom face
+      RED = 4,      // Left face
+      BLUE = 5      // Back face
     };
 
-    Cube(vector<vector<char>> newFaces); // read the input from utilities class then use it to init the cube
-    void applyMove(string move); // selects one of the moves below
-    bool isSolved(); // checks if every side is one color
-    string getStateHash(); // returns hash state
-    void printCube(); // prints cube
+    // Constructor: takes colors, validates, and assigns piece IDs
+    Cube(vector<vector<char>> colorData); 
+    void applyMove(string move);
+    bool isSolved();
+    bool isValid();  // Check if cube was properly initialized
+    string getStateHash();
+    void printCubeState();  // Debug function to show piece assignments
+    
+    // Validation and assignment functions
+    bool validateColorPlacement(const vector<vector<char>>& colors);
+    bool validateAdjacencies(const vector<vector<char>>& colors);
+    void assignPieceIDs(const vector<vector<char>>& colors);
+    
+    // Piece access (returns piece IDs like "Y0", "W4", etc.)
+    string getPiece(int face, int position);
+    void setPiece(int face, int position, string pieceId);
+    
+    // Helper function to extract color from piece ID
+    char getColorFromPiece(const string& pieceId);
 
     // -------------------------------------------------------
     // 12 moves (can be combined to simulate more moves)
@@ -49,8 +63,30 @@ class Cube {
     
   private:
     static constexpr int NUM_FACES = 6;
-    static constexpr int SQUARES = 9;
-    vector<vector<char>> cubeFaces;
+    static constexpr int PIECES_PER_FACE = 9;
+    
+    // Store assigned piece IDs (Y0-Y8, O0-O8, G0-G8, W0-W8, R0-R8, B0-B8)
+    vector<vector<string>> cubeFaces;  // Final piece assignments
+    bool valid;  // Track if cube was properly initialized
+    
+    // Helper functions for piece ID management
+    string generatePieceID(char color, int globalIndex);
+    int getGlobalIndex(char color, int position);
+    bool isValidAdjacency(char color1, char color2);
+    bool areOppositeColors(char color1, char color2);
+    
+    // Adjacency-based piece assignment helpers
+    struct AdjacentPosition {
+        int face;
+        int position;
+        AdjacentPosition(int f, int p) : face(f), position(p) {}
+    };
+    
+    vector<AdjacentPosition> getAdjacentPositions(int face, int position);
+    string determineEdgePieceID(const vector<vector<char>>& colors, int face, int position);
+    string determineCornerPieceID(const vector<vector<char>>& colors, int face, int position);
+    int getEdgeIDFromAdjacency(char color1, char color2);
+    int getCornerIDFromAdjacency(char color1, char color2, char color3);
 };
 
 #endif
