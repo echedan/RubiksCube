@@ -1,11 +1,11 @@
-#include "include/Cube.h"
+#include "../include/Cube.h"
 
 // read the input from utilities class then use it to init the cube
 Cube::Cube(vector<vector<char>> newFaces){
   cubeFaces = newFaces;
   printCube();
 }
-
+/*
 // selects one of the moves below
 void Cube::applyMove(string move){
   switch(move){
@@ -74,7 +74,7 @@ void Cube::applyMove(string move){
       break;
   }
 }
-
+*/
 // checks if every side is one color
 bool Cube::isSolved(){
   for(int i = 0; i < NUM_FACES; i++){
