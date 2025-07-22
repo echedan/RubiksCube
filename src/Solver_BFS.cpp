@@ -1,4 +1,4 @@
-﻿#include "../include/Solver.h"
+﻿#include "Solver.h"
 
 // Static member definition
 const vector<string> Solver::MOVES = {
