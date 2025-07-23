@@ -5,7 +5,7 @@
 #include <queue>
 #include <unordered_set>
 
-class Solver {
+class Solver : private Cube {
 public:
     // Structure to represent a state in the search
     struct CubeState {
@@ -24,7 +24,12 @@ public:
     static vector<string> getAllPossibleMoves();
     static string cubeToString(const Cube& cube);  // For state hashing
     static void printSolution(const vector<string>& moves);
-    
+
+    //Function for Generating the White Cross
+    int xDist();
+    int yDist();
+    int zDist();
+    void crosser();
 private:
     // All possible single moves for a Rubik's cube
     static const vector<string> MOVES;

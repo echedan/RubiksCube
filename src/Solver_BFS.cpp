@@ -118,3 +118,27 @@ void Solver::printSolution(const vector<string>& moves) {
     }
     cout << endl;
 }
+int Solver::xDist()
+{
+
+}
+int Solver::yDist()
+{
+
+}
+int Solver::zDist()
+{
+
+}
+void Solver::crosser()
+{
+    int x_r, y_r, z_r;
+    
+    if(cubeFaces[WHITE][28] != 'W' && cubeFaces[GREEN][25] != 'G')
+    {
+        for(int i = 0; i < 54; ++i)
+        {
+            //if
+        }
+    }
+}
