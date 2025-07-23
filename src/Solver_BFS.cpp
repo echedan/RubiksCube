@@ -118,27 +118,44 @@ void Solver::printSolution(const vector<string>& moves) {
     }
     cout << endl;
 }
-int Solver::xDist()
+int Solver::xDist(int color, int dest)
 {
-
+    return 0;
 }
-int Solver::yDist()
+int Solver::yDist(int color, int dest)
 {
-
+    //if(color == dest)
+    return 0;
 }
-int Solver::zDist()
+void Solver::setCor()
 {
-
+    corrFace = 
+    {
+        {cubeFaces[BLUE][1], cubeFaces[RED][1], cubeFaces[ORANGE][1], cubeFaces[GREEN][1]}, 
+        {cubeFaces[YELLOW][5], cubeFaces[GREEN][5], cubeFaces[BLUE][3], cubeFaces[WHITE][5]},
+        {cubeFaces[YELLOW][7], cubeFaces[RED][5], cubeFaces[ORANGE][3], cubeFaces[WHITE][1]},
+        {cubeFaces[GREEN][7], cubeFaces[RED][7], cubeFaces[ORANGE][7], cubeFaces[BLUE][7]},
+        {cubeFaces[YELLOW][3], cubeFaces[BLUE][5], cubeFaces[GREEN][3], cubeFaces[WHITE][3]},
+        {cubeFaces[YELLOW][1], cubeFaces[ORANGE][5], cubeFaces[RED][3], cubeFaces[WHITE][7]}
+    };
 }
 void Solver::crosser()
 {
-    int x_r, y_r, z_r;
-    
-    if(cubeFaces[WHITE][28] != 'W' && cubeFaces[GREEN][25] != 'G')
+    int x_r, y_r;
+    setCor();
+    if(cubeFaces[WHITE][1] != 'W' && cubeFaces[GREEN][7] != 'G')
     {
-        for(int i = 0; i < 54; ++i)
+        for(int i = 0; i < 6; ++i)
         {
-            //if
+            for(int j = 1; j < 9; j + 2)
+            {
+                if(cubeFaces[i][j] == 'W' && corrFace[i][j] == 'G')
+                {
+                    x_r = xDist(i, GREEN);
+                    if(i == WHITE){y_r = 0;}
+                    else{y_r = yDist(i, WHITE);};
+                }
+            }
         }
     }
 }

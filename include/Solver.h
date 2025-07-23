@@ -26,13 +26,14 @@ public:
     static void printSolution(const vector<string>& moves);
 
     //Function for Generating the White Cross
-    int xDist();
-    int yDist();
-    int zDist();
+    int xDist(int color, int dest);
+    int yDist(int color, int dest);
+    void setCor();
     void crosser();
 private:
     // All possible single moves for a Rubik's cube
     static const vector<string> MOVES;
+    vector<vector<char>> corrFace;
 };
 
 #endif

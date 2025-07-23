@@ -68,12 +68,7 @@ class Cube {
     static constexpr int PIECES_PER_FACE = 9;
     
     // Store assigned piece IDs (Y0-Y8, O0-O8, G0-G8, W0-W8, R0-R8, B0-B8)
-<<<<<<< HEAD
-    vector<vector<char>> cubeFaces;  // Final piece assignments
-=======
-  protected:
-   vector<vector<string>> cubeFaces;  // Final piece assignments
->>>>>>> main
+     // Final piece assignments
     bool valid;  // Track if cube was properly initialized
     
     // Helper functions for piece ID management
@@ -94,6 +89,8 @@ class Cube {
     string determineCornerPieceID(const vector<vector<char>>& colors, int face, int position);
     int getEdgeIDFromAdjacency(char color1, char color2);
     int getCornerIDFromAdjacency(char color1, char color2, char color3);
+    protected:
+      vector<vector<char>> cubeFaces; 
 };
 
 #endif

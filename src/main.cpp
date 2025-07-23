@@ -58,6 +58,7 @@ Cube* readCube()
         }
         cout << endl;
     }
+    
     //end
     return new Cube(conVec);
 }
