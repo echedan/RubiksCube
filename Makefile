@@ -13,4 +13,4 @@ Solver_BFS.o: src/Solver_BFS.cpp
 	g++ -c src/Solver_BFS.cpp
 
 clean:
-	rm main.o Cube.o Solver_AStar.o Solver_BFS.o 
+	rm main.o Cube.o Solver_AStar.o Solver_BFS.o solver.exe
